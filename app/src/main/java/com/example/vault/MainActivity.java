@@ -1,7 +1,9 @@
 package com.example.vault;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.vault.ui.login.VaultLoginActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -15,8 +17,16 @@ import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (!isUserLoggedIn()){
+            Intent firstIntent = new Intent(this, VaultLoginActivity.class);
+            startActivity(firstIntent);
+            finish();
+        } else {
+
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -52,5 +62,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private boolean isUserLoggedIn() {
+        return false;
     }
 }
