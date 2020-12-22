@@ -3,7 +3,7 @@ package com.example.vault;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.vault.ui.login.VaultLoginActivity;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -21,9 +21,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if (!isUserLoggedIn()){
-            Intent loginIntent = new Intent(this, VaultLoginActivity.class);
-            startActivity(loginIntent);
-            finish();
+            //Intent loginIntent = new Intent(this, VaultLoginActivity.class);
+            //startActivity(loginIntent);
+            //finish();
         } else {
             Intent homeIntent = new Intent(this, HomeActivity.class);
             startActivity(homeIntent);
@@ -67,6 +67,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean isUserLoggedIn() {
-        return true;
+        return false;
     }
 }
