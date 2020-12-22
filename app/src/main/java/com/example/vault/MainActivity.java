@@ -20,10 +20,14 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if (!isUserLoggedIn()){
-            //Intent loginIntent = new Intent(this, VaultLoginActivity.class);
-            //startActivity(loginIntent);
-            //finish();
+        if (firstTime()) {
+            Intent createPinIntent = new Intent(this, CreatePinActivity.class);
+            startActivity(createPinIntent);
+            finish();
+        } else if (!isUserLoggedIn()){
+            Intent loginIntent = new Intent(this, LoginActivity.class);
+            startActivity(loginIntent);
+            finish();
         } else {
             Intent homeIntent = new Intent(this, HomeActivity.class);
             startActivity(homeIntent);
@@ -67,6 +71,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean isUserLoggedIn() {
+        return false;
+    }
+
+    private boolean firstTime() {
         return false;
     }
 }
