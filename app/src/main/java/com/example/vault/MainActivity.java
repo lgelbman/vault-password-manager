@@ -21,11 +21,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if (!isUserLoggedIn()){
-            Intent firstIntent = new Intent(this, VaultLoginActivity.class);
-            startActivity(firstIntent);
+            Intent loginIntent = new Intent(this, VaultLoginActivity.class);
+            startActivity(loginIntent);
             finish();
         } else {
-
+            Intent homeIntent = new Intent(this, HomeActivity.class);
+            startActivity(homeIntent);
+            finish();
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -65,6 +67,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean isUserLoggedIn() {
-        return false;
+        return true;
     }
 }
