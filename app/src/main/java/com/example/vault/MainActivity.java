@@ -75,6 +75,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean firstTime() {
-        return false;
+        return true;
     }
 }

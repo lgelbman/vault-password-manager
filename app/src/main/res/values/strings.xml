@@ -26,5 +26,9 @@
     <string name="title_activity_login">FullscreenActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="create_pin">Please create a PIN</string>
+    <string name="enter_pin_hint">enter PIN</string>
+    <string name="confirm_pin_hint">confirm PIN</string>
+
 
 </resources>
