@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(loginIntent);
             finish();
         } else {
-            Intent homeIntent = new Intent(this, HomeActivity.class);
+            Intent homeIntent = new Intent(this, LoginActivity.class);
             startActivity(homeIntent);
             finish();
         }
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean isUserLoggedIn() {
-        return false;
+        return true;
     }
 
     private boolean firstTime() {
