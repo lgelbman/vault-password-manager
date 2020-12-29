@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if (firstTime()) {
+        if (createdPIN()) {
             Intent createPinIntent = new Intent(this, CreatePinActivity.class);
             startActivity(createPinIntent);
             finish();
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(loginIntent);
             finish();
         } else {
-            Intent homeIntent = new Intent(this, LoginActivity.class);
+            Intent homeIntent = new Intent(this, HomeActivity.class);
             startActivity(homeIntent);
             finish();
         }
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    private boolean firstTime() {
+    private boolean createdPIN() {
         return false;
     }
 }
