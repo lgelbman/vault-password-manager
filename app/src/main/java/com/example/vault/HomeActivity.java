@@ -1,6 +1,7 @@
 package com.example.vault;
 
 import android.app.ActionBar;
+import android.content.Context;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -12,6 +13,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.text.Layout;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -52,13 +54,11 @@ public class HomeActivity extends AppCompatActivity {
 
 
     private void DisplayPasswords() {
-        LinearLayout pLayout = findViewById(R.id.passwords_layout);
-        for (UserAccount user : accounts) {
-            LinearLayout hpLayout = new LinearLayout(new ContextThemeWrapper
-                    (this, R.style.user_account_layout), null, 0);
-            setHPLayoutParams(hpLayout);
-            addButtonsToLayout(hpLayout, user);
-            pLayout.addView(hpLayout);
+        LinearLayout passwordsLayout = findViewById(R.id.passwords_layout);
+        for (UserAccount account : accounts) {
+            LinearLayout userCredsLayout = (LinearLayout)LayoutInflater.from(HomeActivity.this)
+                    .inflate(R.layout.user_credentials_layout, null);
+            passwordsLayout.addView(userCredsLayout);
         }
     }
 
@@ -76,7 +76,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private Button generateCredentialsButton(UserAccount user) {
-        Button button = new Button(new ContextThemeWrapper(this, R.style.standard_button), null, 0);
+        Button button = new Button(new ContextThemeWrapper(this, R.style.user_button), null, 0);
         button.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
         button.setGravity(Gravity.CENTER_HORIZONTAL);
         button.setText(user.getUsername());
@@ -84,7 +84,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private ImageButton generateCopyButton() {
-        ImageButton button = new ImageButton(this);
+        ImageButton button = new ImageButton(new ContextThemeWrapper(this, R.style.user_button), null, 0);
         button.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
         button.setImageResource(R.drawable.ic_baseline_content_copy_24);
         return button;
