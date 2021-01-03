@@ -114,7 +114,7 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
-    private String read() {
+    private void read() {
         try {
             Gson gson = new Gson();
             String filePath = getApplicationContext().getFilesDir().getAbsolutePath() + "/" + fileName;
@@ -124,6 +124,5 @@ public class HomeActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return "";
     }
 }
