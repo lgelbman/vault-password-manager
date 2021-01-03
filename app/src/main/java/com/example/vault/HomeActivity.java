@@ -1,16 +1,14 @@
 package com.example.vault;
 
-import android.app.ActionBar;
-import android.content.Context;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.gson.Gson;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.text.Layout;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -20,12 +18,16 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 
     List<UserAccount> accounts = new ArrayList<>();
+    String fileName = "userAccountsFile.txt";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +52,7 @@ public class HomeActivity extends AppCompatActivity {
         for (int i = 0; i < 20; i++) {
             accounts.add(new UserAccount("goodUsername", "dgehsdfh"));
         }
+        write();
     }
 
 
@@ -88,5 +91,31 @@ public class HomeActivity extends AppCompatActivity {
         button.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
         button.setImageResource(R.drawable.ic_baseline_content_copy_24);
         return button;
+    }
+
+    private void write() {
+        try {
+            Gson gson = new Gson();
+            String userAccountsJSON = gson.toJson(accounts);
+            FileOutputStream fileOutputStream = getApplicationContext()
+                    .openFileOutput(fileName, MODE_PRIVATE);
+            fileOutputStream.write(userAccountsJSON.getBytes());
+            fileOutputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private String read() {
+        try {
+            Gson gson = new Gson();
+            FileInputStream fileInputStream = getApplicationContext()
+                    .openFileInput(fileName);
+            fileInputStream.read();
+            fileInputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 }
