@@ -5,10 +5,14 @@ import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.os.Environment;
+import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -20,7 +24,9 @@ import android.widget.LinearLayout.LayoutParams;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +41,9 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        testMethod();
+        //testMethod();
+        read();
+        Log.d("test", accounts.get(0).getUsername());
         DisplayPasswords();
 
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -109,10 +117,10 @@ public class HomeActivity extends AppCompatActivity {
     private String read() {
         try {
             Gson gson = new Gson();
-            FileInputStream fileInputStream = getApplicationContext()
-                    .openFileInput(fileName);
-            fileInputStream.read();
-            fileInputStream.close();
+            String filePath = getApplicationContext().getFilesDir().getAbsolutePath() + "/" + fileName;
+            Type typeOfListOfUserAccounts = new TypeToken<List<UserAccount>>() {}.getType();
+            JsonReader json_Reader = new JsonReader(new FileReader(filePath));
+            accounts = gson.fromJson(json_Reader, typeOfListOfUserAccounts);
         } catch (IOException e) {
             e.printStackTrace();
         }
