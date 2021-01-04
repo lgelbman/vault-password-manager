@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         if (!createdPIN()) {    // if no PIN created yet
+            SharedPreferences.Editor editor = sharedPreferences.edit();
             Intent createPinIntent = new Intent(this, CreatePinActivity.class);
             startActivity(createPinIntent);
             finish();

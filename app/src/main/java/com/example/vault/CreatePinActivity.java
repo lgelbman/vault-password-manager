@@ -48,7 +48,7 @@ public class CreatePinActivity extends AppCompatActivity {
 
             if (isValidPIN(pin1, pin2)) {
                 savePIN(pin1);
-                startHomeActivity();
+                logInUser();
             }
         });
     }
@@ -78,9 +78,12 @@ public class CreatePinActivity extends AppCompatActivity {
         editor.apply();
     }
 
-    private void startHomeActivity() {
+    private void logInUser() {
         Intent homeIntent = new Intent(this, HomeActivity.class);
         startActivity(homeIntent);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("IsLoggedIn", true);
+        editor.apply();
         finish();
     }
 }

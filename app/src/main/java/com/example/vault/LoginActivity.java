@@ -5,16 +5,26 @@ import android.annotation.SuppressLint;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
 public class LoginActivity extends AppCompatActivity {
+
+    SharedPreferences sharedPreferences;
+
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -104,6 +114,9 @@ public class LoginActivity extends AppCompatActivity {
         mControlsView = findViewById(R.id.fullscreen_content_controls);
         mContentView = findViewById(R.id.login_enter_pin_tv);
 
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        setupLayout();
+
         // Set up the user interaction to manually show or hide the system UI.
         mContentView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,6 +129,36 @@ public class LoginActivity extends AppCompatActivity {
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
 
+    }
+
+    private void setupLayout() {
+        EditText etPIN = findViewById(R.id.login_pin_et);
+        Button loginButton = findViewById(R.id.login_button);
+        loginButton.setOnClickListener(v ->{
+            String pin = etPIN.getText().toString();
+            if (isPinCorrect(pin)){
+                logUserIn();
+            } else {
+                TextView feedBackTV = findViewById(R.id.login_user_feedback_tv);
+                feedBackTV.setTextColor(Color.RED);
+                feedBackTV.setText("Incorrect PIN");
+            }
+        });
+    }
+
+    private void logUserIn() {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("IsLoggedIn", true);
+        editor.apply();
+        Intent homeIntent = new Intent(this, HomeActivity.class);
+        startActivity(homeIntent);
+        finish();
+    }
+
+    private boolean isPinCorrect(String inputPIN) {
+        String userPIN = sharedPreferences.getString("vaultPIN", null);
+        //un-hash pin here
+        return userPIN.equals(inputPIN);
     }
 
     @Override

@@ -27,7 +27,7 @@ import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 
-    List<UserAccount> accounts = new ArrayList<>();
+
     Model model;
 
 
@@ -50,12 +50,7 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(intent);
         });
     }
-
-    private void testMethod() {
-        for (int i = 0; i < 20; i++) {
-            accounts.add(new UserAccount("goodUsername", "dgehsdfh"));
-        }
-    }
+    
 
     private void DisplayPasswords() {
         LinearLayout passwordsLayout = findViewById(R.id.passwords_layout);
