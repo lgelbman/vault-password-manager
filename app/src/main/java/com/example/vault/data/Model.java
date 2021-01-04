@@ -12,6 +12,7 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -22,8 +23,8 @@ public class Model {
     private String fileName = "userAccountsFile.txt";
     private static Model instance;
 
-    public static Model getInstance(Context context) {
-        if (instance == null){
+    public static synchronized Model getInstance(Context context) {
+        if (instance == null) {
             synchronized (Model.class) {
                 if (instance == null) {
                     return new Model(context);
@@ -71,6 +72,9 @@ public class Model {
             Type typeOfListOfUserAccounts = new TypeToken<List<UserAccount>>() {}.getType();
             JsonReader json_Reader = new JsonReader(new FileReader(filePath));
             accounts = gson.fromJson(json_Reader, typeOfListOfUserAccounts);
+            if (accounts == null) {
+                accounts = new ArrayList<>();
+            }
             json_Reader.close();
         } catch (IOException e) {
             e.printStackTrace();
