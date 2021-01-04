@@ -22,9 +22,13 @@ public class Model {
     private String fileName = "userAccountsFile.txt";
     private static Model instance;
 
-    public static synchronized Model getInstance(Context context) {
+    public static Model getInstance(Context context) {
         if (instance == null){
-            return new Model(context);
+            synchronized (Model.class) {
+                if (instance == null) {
+                    return new Model(context);
+                }
+            }
         }
         return instance;
     }
