@@ -1,6 +1,7 @@
 package com.example.vault;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 
@@ -10,6 +11,7 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.preference.PreferenceManager;
 import android.view.View;
 
 import android.view.Menu;
@@ -17,18 +19,20 @@ import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
 
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if (createdPIN()) {
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        if (!createdPIN()) {    // if no PIN created yet
             Intent createPinIntent = new Intent(this, CreatePinActivity.class);
             startActivity(createPinIntent);
             finish();
-        } else if (!isUserLoggedIn()){
+        } else if (!isUserLoggedIn()) {     // if logged out
             Intent loginIntent = new Intent(this, LoginActivity.class);
             startActivity(loginIntent);
             finish();
-        } else {
+        } else {    // they're already logged in
             Intent homeIntent = new Intent(this, HomeActivity.class);
             startActivity(homeIntent);
             finish();
@@ -75,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean createdPIN() {
-        return false;
+        return sharedPreferences.contains("VaultPIN");
     }
+
 }
