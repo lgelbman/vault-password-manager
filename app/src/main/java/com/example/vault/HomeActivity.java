@@ -1,5 +1,7 @@
 package com.example.vault;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -14,7 +16,6 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -64,23 +65,32 @@ public class HomeActivity extends AppCompatActivity {
             passwordsLayout.addView(userCredsLayout);
             Button button = (Button) userCredsLayout.getChildAt(0);
             button.setText(account.getUsername());
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    String userName = account.getUsername();
-                    String password = account.getPasswordHash();     //un-hash password here
-                    String hiddenPassword = hidePassword(password);
-                    String currentTextOnButton = button.getText().toString();
-                    if (currentTextOnButton.equals(userName)) {
-                        button.setText(hiddenPassword);
-                    } else if (currentTextOnButton.equals(hiddenPassword)) {
-                        button.setText(password);
-                    } else {
-                        button.setText(userName);
-                    }
+            String userName = account.getUsername();
+            String password = account.getPasswordHash();     //un-hash password here
+            String hiddenPassword = hidePassword(password);
+            button.setOnClickListener(v -> {
+                String currentTextOnButton = button.getText().toString();
+                if (currentTextOnButton.equals(userName)) {
+                    button.setText(hiddenPassword);
+                } else if (currentTextOnButton.equals(hiddenPassword)) {
+                    button.setText(password);
+                } else {
+                    button.setText(userName);
                 }
             });
             ImageButton copyButton = (ImageButton) userCredsLayout.getChildAt(1);
+            copyButton.setOnClickListener(v -> {
+                ClipboardManager clipboard = (ClipboardManager)
+                        getSystemService(this.CLIPBOARD_SERVICE);
+                String currentTextOnButton = button.getText().toString();
+                ClipData clip;
+                if (currentTextOnButton.equals(userName)) {
+                    clip = ClipData.newPlainText("password", userName);
+                } else {
+                    clip = ClipData.newPlainText("password", password);
+                }
+                clipboard.setPrimaryClip(clip);
+            });
         }
     }
 
