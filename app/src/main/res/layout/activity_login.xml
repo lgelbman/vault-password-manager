@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="?attr/fullscreenBackgroundColor"
     android:theme="@style/ThemeOverlay.Vault.FullscreenContainer"
     tools:context=".LoginActivity">
@@ -15,13 +15,13 @@
         android:id="@+id/login_enter_pin_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="@dimen/login_header_padding"
         android:gravity="center"
+        android:paddingVertical="@dimen/login_header_padding"
         android:text="@string/login_pin_header"
         android:textColor="?attr/fullscreenTextColor"
         android:textSize="@dimen/login_header_text_size"
         android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/login_pin_et"
@@ -39,22 +39,22 @@
         android:id="@+id/login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/login_pin_et"
+        android:layout_margin="@dimen/activity_vertical_margin"
+        android:text="login"
+        android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="@dimen/activity_vertical_margin"
-        />
+        app:layout_constraintTop_toBottomOf="@id/login_pin_et" />
 
     <TextView
         android:id="@+id/login_user_feedback_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/login_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:paddingVertical="@dimen/standard_padding"
         android:text="Create PIN"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/login_button" />
 
 
     <!-- This FrameLayout insets its children based on system windows using
@@ -72,7 +72,6 @@
             android:layout_gravity="bottom|center_horizontal"
             android:orientation="horizontal"
             tools:ignore="UselessParent">
-
 
 
         </LinearLayout>

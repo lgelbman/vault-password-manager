@@ -24,6 +24,23 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        checkLoginStatus();
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+    }
+
+    private void checkLoginStatus() {
         if (!createdPIN()) {    // if no PIN created yet
             SharedPreferences.Editor editor = sharedPreferences.edit();
             Intent createPinIntent = new Intent(this, CreatePinActivity.class);
@@ -38,19 +55,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(homeIntent);
             finish();
         }
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
     @Override
@@ -76,11 +80,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean isUserLoggedIn() {
-        return true;
+        return false;
     }
 
     private boolean createdPIN() {
-        return sharedPreferences.contains("VaultPIN");
+        return sharedPreferences.contains(getString(R.string.user_pin_key));
     }
 
 }

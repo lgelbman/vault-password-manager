@@ -156,7 +156,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private boolean isPinCorrect(String inputPIN) {
-        String userPIN = sharedPreferences.getString("vaultPIN", null);
+        String userPIN = sharedPreferences.getString(getString(R.string.user_pin_key), null);
         //un-hash pin here
         return userPIN.equals(inputPIN);
     }

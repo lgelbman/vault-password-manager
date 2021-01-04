@@ -74,7 +74,7 @@ public class CreatePinActivity extends AppCompatActivity {
 
     private void savePIN(String pin) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("VaultPIN", pin);
+        editor.putString(getString(R.string.user_pin_key), pin);
         editor.apply();
     }
 
