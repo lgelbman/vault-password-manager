@@ -1,7 +1,9 @@
 package com.example.vault;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.vault.data.Model;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
@@ -22,10 +24,12 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +38,7 @@ public class HomeActivity extends AppCompatActivity {
 
     List<UserAccount> accounts = new ArrayList<>();
     String fileName = "userAccountsFile.txt";
+    Model model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,17 +47,17 @@ public class HomeActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         //testMethod();
-        read();
-        Log.d("test", accounts.get(0).getUsername());
+        model = Model.getInstance(this);
         DisplayPasswords();
+        setupFab();
+    }
 
+    private void setupFab() {
         FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
+        fab.setOnClickListener(view -> {
+            Intent intent = new Intent(HomeActivity.this, AddNewAccountActivity.class);
+            startActivity(intent);
+
         });
     }
 
@@ -60,13 +65,12 @@ public class HomeActivity extends AppCompatActivity {
         for (int i = 0; i < 20; i++) {
             accounts.add(new UserAccount("goodUsername", "dgehsdfh"));
         }
-        write();
     }
 
 
     private void DisplayPasswords() {
         LinearLayout passwordsLayout = findViewById(R.id.passwords_layout);
-        for (UserAccount account : accounts) {
+        for (UserAccount account : model.getAccounts()) {
             LinearLayout userCredsLayout = (LinearLayout)LayoutInflater.from(HomeActivity.this)
                     .inflate(R.layout.user_credentials_layout, null);
             passwordsLayout.addView(userCredsLayout);
@@ -101,28 +105,5 @@ public class HomeActivity extends AppCompatActivity {
         return button;
     }
 
-    private void write() {
-        try {
-            Gson gson = new Gson();
-            String userAccountsJSON = gson.toJson(accounts);
-            FileOutputStream fileOutputStream = getApplicationContext()
-                    .openFileOutput(fileName, MODE_PRIVATE);
-            fileOutputStream.write(userAccountsJSON.getBytes());
-            fileOutputStream.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
-    private void read() {
-        try {
-            Gson gson = new Gson();
-            String filePath = getApplicationContext().getFilesDir().getAbsolutePath() + "/" + fileName;
-            Type typeOfListOfUserAccounts = new TypeToken<List<UserAccount>>() {}.getType();
-            JsonReader json_Reader = new JsonReader(new FileReader(filePath));
-            accounts = gson.fromJson(json_Reader, typeOfListOfUserAccounts);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }

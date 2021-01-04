@@ -32,6 +32,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".AddNewAccountActivity" android:theme="@style/AppTheme.create_activity_theme"></activity>
 
     </application>
 </manifest>

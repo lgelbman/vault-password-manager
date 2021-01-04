@@ -19,6 +19,9 @@
     <string name="confirm_pin_hint">confirm PIN</string>
     <string name="login_pin_header">Enter PIN to unlock</string>
     <string name="accounts_file_path">"/Vault/app/src/main/assets/AccountsData.txt"</string>
+    <string name="create_username_hint">Username</string>
+    <string name="create_password_hint">Password</string>
+    <string name="create_account_button_text">save</string>
 
 
 </resources>
