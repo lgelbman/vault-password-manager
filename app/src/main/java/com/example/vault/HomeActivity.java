@@ -4,17 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.vault.data.Model;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.os.Environment;
-import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -24,21 +20,15 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Serializable;
-import java.lang.reflect.Type;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 
     List<UserAccount> accounts = new ArrayList<>();
-    String fileName = "userAccountsFile.txt";
     Model model;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +47,6 @@ public class HomeActivity extends AppCompatActivity {
         fab.setOnClickListener(view -> {
             Intent intent = new Intent(HomeActivity.this, AddNewAccountActivity.class);
             startActivity(intent);
-
         });
     }
 
@@ -67,14 +56,41 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
-
     private void DisplayPasswords() {
         LinearLayout passwordsLayout = findViewById(R.id.passwords_layout);
         for (UserAccount account : model.getAccounts()) {
             LinearLayout userCredsLayout = (LinearLayout)LayoutInflater.from(HomeActivity.this)
                     .inflate(R.layout.user_credentials_layout, null);
             passwordsLayout.addView(userCredsLayout);
+            Button button = (Button) userCredsLayout.getChildAt(0);
+            button.setText(account.getUsername());
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String userName = account.getUsername();
+                    String password = account.getPasswordHash();     //un-hash password here
+                    String hiddenPassword = hidePassword(password);
+                    String currentTextOnButton = button.getText().toString();
+                    if (currentTextOnButton.equals(userName)) {
+                        button.setText(hiddenPassword);
+                    } else if (currentTextOnButton.equals(hiddenPassword)) {
+                        button.setText(password);
+                    } else {
+                        button.setText(userName);
+                    }
+                }
+            });
+            ImageButton copyButton = (ImageButton) userCredsLayout.getChildAt(1);
         }
+    }
+
+    private String hidePassword(String password){
+        String hiddenPasswordSymbol = "•";
+        String result = "";
+        for (int i = 0; i < password.length(); i++){
+            result = result + hiddenPasswordSymbol;
+        }
+        return result;
     }
 
     private void setHPLayoutParams(LinearLayout hpLayout) {
