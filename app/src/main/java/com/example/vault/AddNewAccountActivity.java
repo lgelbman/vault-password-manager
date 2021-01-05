@@ -1,6 +1,7 @@
 package com.example.vault;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -41,8 +42,11 @@ public class AddNewAccountActivity extends Activity {
                 UserAccount userAccount = new UserAccount(userName, password);
                 model.addNewUser(userAccount, getApplicationContext());
                 finish();
+                Intent restartHomeActivityIntent = new Intent(AddNewAccountActivity.this, HomeActivity.class);
+                startActivity(restartHomeActivityIntent);
             }
         });
+
 
     }
 

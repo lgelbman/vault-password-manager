@@ -22,13 +22,16 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 
 
-    Model model;
+    private Model model;
+    private LinearLayout passwordsLayout;
 
 
     @Override
@@ -37,7 +40,6 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //testMethod();
         model = Model.getInstance(this);
         DisplayPasswords();
         setupFab();
@@ -53,40 +55,58 @@ public class HomeActivity extends AppCompatActivity {
     
 
     private void DisplayPasswords() {
-        LinearLayout passwordsLayout = findViewById(R.id.passwords_layout);
+        passwordsLayout = getLinearLayout(R.id.passwords_layout);
         for (UserAccount account : model.getAccounts()) {
-            LinearLayout userCredsLayout = (LinearLayout)LayoutInflater.from(HomeActivity.this)
-                    .inflate(R.layout.user_credentials_layout, null);
-            passwordsLayout.addView(userCredsLayout);
-            Button button = (Button) userCredsLayout.getChildAt(0);
-            button.setText(account.getUsername());
-            String userName = account.getUsername();
-            String password = account.getPasswordHash();     //un-hash password here
-            String hiddenPassword = hidePassword(password);
-            button.setOnClickListener(v -> {
-                String currentTextOnButton = button.getText().toString();
-                if (currentTextOnButton.equals(userName)) {
-                    button.setText(hiddenPassword);
-                } else if (currentTextOnButton.equals(hiddenPassword)) {
-                    button.setText(password);
-                } else {
-                    button.setText(userName);
-                }
-            });
-            ImageButton copyButton = (ImageButton) userCredsLayout.getChildAt(1);
-            copyButton.setOnClickListener(v -> {
-                ClipboardManager clipboard = (ClipboardManager)
-                        getSystemService(this.CLIPBOARD_SERVICE);
-                String currentTextOnButton = button.getText().toString();
-                ClipData clip;
-                if (currentTextOnButton.equals(userName)) {
-                    clip = ClipData.newPlainText("password", userName);
-                } else {
-                    clip = ClipData.newPlainText("password", password);
-                }
-                clipboard.setPrimaryClip(clip);
-            });
+            setUpUserCredsLayout(account);
         }
+    }
+
+    private LinearLayout getLinearLayout(int p) {
+        return findViewById(p);
+    }
+
+    private void setUpUserCredsLayout(UserAccount account) {
+        LinearLayout userCredsLayout = (LinearLayout) LayoutInflater.from(HomeActivity.this)
+                .inflate(R.layout.user_credentials_layout, null);
+        passwordsLayout.addView(userCredsLayout);
+        String userName = account.getUsername();
+        String password = account.getPasswordHash();     //un-hash password here
+        String hiddenPassword = hidePassword(password);
+        Button button = setUpButton(account, userCredsLayout, userName, password, hiddenPassword);
+        setupCopyButton(userCredsLayout, userName, password, button);
+    }
+
+    private void setupCopyButton(LinearLayout userCredsLayout, String userName, String password, Button button) {
+        ImageButton copyButton = (ImageButton) userCredsLayout.getChildAt(1);
+        copyButton.setOnClickListener(v -> {
+            ClipboardManager clipboard = (ClipboardManager)
+                    getSystemService(this.CLIPBOARD_SERVICE);
+            String currentTextOnButton = button.getText().toString();
+            ClipData clip;
+            if (currentTextOnButton.equals(userName)) {
+                clip = ClipData.newPlainText("password", userName);
+            } else {
+                clip = ClipData.newPlainText("password", password);
+            }
+            clipboard.setPrimaryClip(clip);
+        });
+    }
+
+    @NotNull
+    private Button setUpButton(UserAccount account, LinearLayout userCredsLayout, String userName, String password, String hiddenPassword) {
+        Button button = (Button) userCredsLayout.getChildAt(0);
+        button.setText(account.getUsername());
+        button.setOnClickListener(v -> {
+            String currentTextOnButton = button.getText().toString();
+            if (currentTextOnButton.equals(userName)) {
+                button.setText(hiddenPassword);
+            } else if (currentTextOnButton.equals(hiddenPassword)) {
+                button.setText(password);
+            } else {
+                button.setText(userName);
+            }
+        });
+        return button;
     }
 
     private String hidePassword(String password){
@@ -125,6 +145,7 @@ public class HomeActivity extends AppCompatActivity {
         button.setImageResource(R.drawable.ic_baseline_content_copy_24);
         return button;
     }
+
 
 
 }
