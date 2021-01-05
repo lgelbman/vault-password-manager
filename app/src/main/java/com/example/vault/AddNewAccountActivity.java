@@ -33,18 +33,15 @@ public class AddNewAccountActivity extends Activity {
         EditText userNameET = findViewById(R.id.create_username_et);
         EditText passwordET = findViewById(R.id.create_password_et);
         Button createAccountButton = findViewById(R.id.create_account_button);
-        createAccountButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String userName = userNameET.getText().toString();
-                String password = passwordET.getText().toString();
-                //hash password here
-                UserAccount userAccount = new UserAccount(userName, password);
-                model.addNewUser(userAccount, getApplicationContext());
-                finish();
-                Intent restartHomeActivityIntent = new Intent(AddNewAccountActivity.this, HomeActivity.class);
-                startActivity(restartHomeActivityIntent);
-            }
+        createAccountButton.setOnClickListener(v -> {
+            String userName = userNameET.getText().toString();
+            String password = passwordET.getText().toString();
+            //hash password here
+            UserAccount userAccount = new UserAccount(userName, password);
+            model.addNewUser(userAccount, getApplicationContext());
+            Intent restartHomeActivityIntent = new Intent(AddNewAccountActivity.this, HomeActivity.class);
+            startActivity(restartHomeActivityIntent);
+            finish();
         });
 
 
