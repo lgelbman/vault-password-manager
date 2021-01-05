@@ -21,30 +21,33 @@ public class AddNewAccountActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         model = Model.getInstance(this);
+        setUpLayout();
+    }
 
-
+    private void setUpLayout() {
         setContentView(R.layout.add_account_popup_window);
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         int width = dm.widthPixels;
         int height = dm.heightPixels;
-        getWindow().setLayout((int) (width*.5), (int) (height*.5));
+        getWindow().setLayout((int) (width * .5), (int) (height * .5));
+        createViews();
+    }
 
-        EditText userNameET = findViewById(R.id.create_username_et);
+    private void createViews() {
+        EditText usernameET = findViewById(R.id.create_username_et);
         EditText passwordET = findViewById(R.id.create_password_et);
         Button createAccountButton = findViewById(R.id.create_account_button);
         createAccountButton.setOnClickListener(v -> {
-            String userName = userNameET.getText().toString();
+            String username = usernameET.getText().toString();
             String password = passwordET.getText().toString();
             //hash password here
-            UserAccount userAccount = new UserAccount(userName, password);
+            UserAccount userAccount = new UserAccount(username, password);
             model.addNewUser(userAccount, getApplicationContext());
             Intent restartHomeActivityIntent = new Intent(AddNewAccountActivity.this, HomeActivity.class);
             startActivity(restartHomeActivityIntent);
             finish();
         });
-
-
     }
 
 }

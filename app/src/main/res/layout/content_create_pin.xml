@@ -3,31 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    android:layout_margin="@dimen/standard_padding">
+    android:layout_margin="@dimen/standard_padding"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <ImageView
         android:id="@+id/create_pin_logo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher_round"
         android:gravity="center"
         android:paddingVertical="@dimen/standard_padding"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        android:src="@mipmap/ic_launcher_round"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <TextView
         android:id="@+id/cp_enter_pin_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/create_pin"
         android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@id/create_pin_logo"
         android:paddingVertical="@dimen/standard_padding"
+        android:text="@string/create_pin"
         android:textSize="@dimen/header_text_size"
         android:textStyle="bold"
-        />
+        app:layout_constraintTop_toBottomOf="@id/create_pin_logo" />
 
     <EditText
         android:id="@+id/cp_enter_pin_et"
@@ -35,47 +33,45 @@
         android:layout_height="wrap_content"
 
         android:layout_gravity="center"
+        android:gravity="center"
         android:hint="@string/enter_pin_hint"
+        android:inputType="numberPassword"
         android:paddingVertical="@dimen/standard_padding"
         app:layout_constraintEnd_toEndOf="parent"
-        android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cp_enter_pin_tv"
-        android:inputType="numberPassword"
-        />
+        app:layout_constraintTop_toBottomOf="@id/cp_enter_pin_tv" />
 
     <EditText
         android:id="@+id/cp_confirm_pin_et"
         android:layout_width="@dimen/et_width"
         android:layout_height="wrap_content"
-        android:paddingVertical="@dimen/standard_padding"
         android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@id/cp_enter_pin_et"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:hint="@string/confirm_pin_hint"
         android:inputType="numberPassword"
-        />
+        android:paddingVertical="@dimen/standard_padding"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cp_enter_pin_et" />
 
     <Button
         android:id="@+id/cp_create_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/cp_confirm_pin_et"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginVertical="@dimen/activity_vertical_margin"
-        android:text="Create"
-        android:textAllCaps="false"/>
+        android:text="@string/create_pin_button_text"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cp_confirm_pin_et" />
 
     <TextView
         android:id="@+id/user_feedback_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/cp_create_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:paddingVertical="@dimen/standard_padding"
-        android:text="Create PIN"
-        />
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cp_create_button" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
