@@ -118,34 +118,4 @@ public class HomeActivity extends AppCompatActivity {
         return result;
     }
 
-    private void setHPLayoutParams(LinearLayout hpLayout) {
-        hpLayout.setOrientation(LinearLayout.HORIZONTAL);
-        hpLayout.setGravity(Gravity.CENTER_HORIZONTAL);
-        hpLayout.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-    }
-
-    private void addButtonsToLayout(LinearLayout hpLayout, UserAccount user) {
-        Button credentialsButton = generateCredentialsButton(user);
-        ImageButton copyButton = generateCopyButton();
-        hpLayout.addView(credentialsButton);
-        hpLayout.addView(copyButton);
-    }
-
-    private Button generateCredentialsButton(UserAccount user) {
-        Button button = new Button(new ContextThemeWrapper(this, R.style.user_button), null, 0);
-        button.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-        button.setGravity(Gravity.CENTER_HORIZONTAL);
-        button.setText(user.getUsername());
-        return button;
-    }
-
-    private ImageButton generateCopyButton() {
-        ImageButton button = new ImageButton(new ContextThemeWrapper(this, R.style.user_button), null, 0);
-        button.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-        button.setImageResource(R.drawable.ic_baseline_content_copy_24);
-        return button;
-    }
-
-
-
 }
