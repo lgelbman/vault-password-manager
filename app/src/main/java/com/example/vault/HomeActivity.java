@@ -24,8 +24,6 @@ import android.widget.LinearLayout.LayoutParams;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 
