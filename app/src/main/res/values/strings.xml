@@ -22,7 +22,7 @@
     <string name="create_username_hint">Username</string>
     <string name="create_password_hint">Password</string>
     <string name="create_account_button_text">save</string>
-    <string name="user_pin_key">VaultPIIN</string>
+    <string name="user_pin_key">VaultPIN</string>
     <string name="create_pin_button_text">Create</string>
 
 
