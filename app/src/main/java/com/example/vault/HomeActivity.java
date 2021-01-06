@@ -77,12 +77,12 @@ public class HomeActivity extends AppCompatActivity {
         String accountType = account.getAccountType();
         String hiddenPassword = hidePassword(password);
         Button button = setUpButton(account, userCredsLayout, userName, password, hiddenPassword);
+        TextView accountTypeTV = (TextView) userCredsLayout.getChildAt(0);
         setupCopyButton(userCredsLayout, userName, password, button);
-        setUpAccountTypeTextView(accountType);
+        setUpAccountTypeTextView(accountType, accountTypeTV);
     }
 
-    private void setUpAccountTypeTextView(String accountType) {
-        TextView accountTypeTV = findViewById(R.id.account_type_et);
+    private void setUpAccountTypeTextView(String accountType, TextView accountTypeTV) {
         accountTypeTV.setText(accountType);
     }
 
