@@ -1,30 +1,42 @@
 package com.example.vault;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Encrypter {
 
-    public int hashPin(String pin) {
+    private final int PIN_LIMIT = 4;
+    private final int ASCII_TABLE_SIZE = 128;
+
+    public int encryptPIN(String pin) {
         return sumOfChars(pin) * Integer.parseInt(pin) % 1000;
     }
 
-
-    public String encryptPassword(String pin, String password) {
-        Map<String, String> map = generateEncryptionMap(pin);
-        return getStringUsingMap(map, password);
+    private int sumOfChars(String pin) {
+        int sum = 0;
+        for (int i = 0; i < PIN_LIMIT; i++) {
+            sum += Character.getNumericValue(pin.charAt(i));
+        }
+        return sum;
     }
 
-    private Map<String, String> generateEncryptionMap(String pin) {
-        Map<String, String> map = new HashMap<>();
-        String lettersSeq = pinToLetters(pin);
-        for (int i = 0; i < lettersSeq.length(); i++) {
-            map.put(Integer.toString(i), String.valueOf(lettersSeq.charAt(i)));
+    public String encryptPassword(String pin, String password) {
+        Map<Integer, Integer> encryptionMap = generateEncryptionMap(pin);
+        return encryptStringWithMap(password, encryptionMap);
+    }
+
+    private Map<Integer, Integer> generateEncryptionMap(String pin) {
+        Map<Integer, Integer> map = new HashMap<>();
+        int[] encryptedPIN = generatePinEncryptedAscii(pin);
+        for (int i = 0; i < PIN_LIMIT; i++) {
+            int ascii = encryptedPIN[i];      // assign ascii of char to int
+            map.put(i, ascii);
         }
-        for ( int i = lettersSeq.length(); i < 26; i++) {
-            for (int j = 0; j < 26; j++) {
-                if (!map.containsValue(Integer.toString(j))) {
-                    map.put(Integer.toString(i), Integer.toString(j));
+        for (int i = PIN_LIMIT; i < ASCII_TABLE_SIZE; i++) {
+            for (int j = 0; j < ASCII_TABLE_SIZE; j++) {
+                if (!map.containsValue(j)) {
+                    map.put(i, j);
                     break;
                 }
             }
@@ -32,59 +44,46 @@ public class Encrypter {
         return map;
     }
 
-    private String getStringUsingMap(Map<String, String> map, String stringToEncrypt) {
-        String result = "";
-        for (int i = 0; i < stringToEncrypt.length() - 1; i++) {
-            String charToAdd = map.get(String.valueOf(stringToEncrypt.charAt(i)));
-            result += charToAdd;
+    private int[] generatePinEncryptedAscii(String pin) {
+        int[] encryptedAscii = new int[PIN_LIMIT];
+        int pinSum = sumOfChars(pin);
+        for (int i = 0; i < PIN_LIMIT; i++) {
+            int pinDigit = Character.getNumericValue(pin.charAt(i));
+            int asciiCode = (pinSum + pinDigit % ASCII_TABLE_SIZE);
+            encryptedAscii[i] = asciiCode;
         }
-        return result;
+        return encryptedAscii;
     }
 
-    private String pinToLetters(String pin) {
-        int sum = sumOfChars(pin);
-        String result = "";
-        for (int i = 0; i < pin.length(); i++) {
-            int alphabeticIndex = ( sum + Character.getNumericValue(pin.charAt(i)) % 25);
-            String characterToAppend = Integer.toString(alphabeticIndex);
-            result += characterToAppend;
+    private String encryptStringWithMap(String password, Map<Integer, Integer> encryptionMap) {
+        StringBuilder encryptedPassword = new StringBuilder();
+        for (int i = 0; i < password.length(); i++) {
+            int ascii = password.charAt(i);                         // get ascii of password char
+            int encryptedCharAscii = (encryptionMap.get(ascii));    // use map to get value for ascii
+            char encryptedCharacter = (char) encryptedCharAscii;    // get char of ascii value returned
+            encryptedPassword.append(encryptedCharacter);           // append the encrypted char
         }
-        return result;
+        return encryptedPassword.toString();
     }
 
-
-
-    private int sumOfChars(String pin) {
-        int acc = 0;
-        for (int i = 0; i < pin.length(); i++) {
-            acc += Character.getNumericValue(pin.charAt(i));
+    public String decryptPassword(String pin, String encryptedPassword) {
+        StringBuilder decryptedPassword = new StringBuilder();
+        Map<Integer, Integer> decryptionMap = invertMap(generateEncryptionMap(pin));
+        for (int i = 0; i < encryptedPassword.length(); i++) {
+            int ascii = encryptedPassword.charAt(i);                // get ascii of encrypted char
+            int decryptedCharAscii = (decryptionMap.get(ascii));    // use map to get ascii of decrypted char
+            char decryptedCharacter = (char) decryptedCharAscii;    // get char of decrypted ascii
+            decryptedPassword.append(decryptedCharacter);           // append the decrypted char
         }
-        return acc;
+        return decryptedPassword.toString();
     }
 
-    public String decryptPassword(String pin, String hashedPassword) {
-        Map<String, String> map = generateEncryptionMap(pin);
-        map = getInverseEncryptionMap(map);
-        String decryptedPassword = "";
-        for (int i = 0; i < hashedPassword.length(); i++) {
-            String letter = String.valueOf(hashedPassword.charAt(i));
-            String decryptedLetter = map.get(letter);
-            decryptedPassword += decryptedLetter;
+    private Map<Integer, Integer> invertMap(Map<Integer, Integer> map) {
+        Map<Integer, Integer> invertedMap = new HashMap<>();
+        for (Map.Entry<Integer, Integer> e : map.entrySet()) {
+            invertedMap.put(e.getValue(), e.getKey());
         }
-        return decryptedPassword;
+        return invertedMap;
     }
-
-    private Map<String, String> getInverseEncryptionMap(Map<String, String> map) {
-        Map<String, String> inverseMap = new HashMap<>();
-        for (Map.Entry<String, String> e : map.entrySet()){
-            inverseMap.put(e.getValue(), e.getKey());
-        }
-        return inverseMap;
-    }
-
-    private String getLetterFromIndex(int index) {
-        return Character.toString ((char) (index + 65));
-    }
-
 
 }
