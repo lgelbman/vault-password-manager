@@ -30,6 +30,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private Model model;
     private LinearLayout passwordsLayout;
+    private Encrypter encrypter = new Encrypter();
 
 
     @Override
@@ -39,6 +40,9 @@ public class HomeActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         model = Model.getInstance(this);
+        int hashedPin = encrypter.hashPin("1234");
+        String s = encrypter.encryptPassword("1234", "abcdef");
+        String s2 = encrypter.decryptPassword("1234", s);
         DisplayPasswords();
         setupFab();
     }
