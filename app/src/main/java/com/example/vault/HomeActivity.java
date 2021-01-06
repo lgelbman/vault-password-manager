@@ -87,7 +87,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void setupCopyButton(LinearLayout userCredsLayout, String userName, String password, Button button) {
-        ImageButton copyButton = (ImageButton) userCredsLayout.getChildAt(1);
+        ImageButton copyButton = (ImageButton) userCredsLayout.getChildAt(2);
         copyButton.setOnClickListener(v -> {
             ClipboardManager clipboard = (ClipboardManager)
                     getSystemService(this.CLIPBOARD_SERVICE);
@@ -104,7 +104,7 @@ public class HomeActivity extends AppCompatActivity {
 
     @NotNull
     private Button setUpButton(UserAccount account, LinearLayout userCredsLayout, String userName, String password, String hiddenPassword) {
-        Button button = (Button) userCredsLayout.getChildAt(0);
+        Button button = (Button) userCredsLayout.getChildAt(1);
         button.setText(account.getUsername());
         button.setOnClickListener(v -> {
             String currentTextOnButton = button.getText().toString();
