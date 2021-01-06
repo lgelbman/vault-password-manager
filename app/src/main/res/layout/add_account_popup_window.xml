@@ -47,6 +47,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/create_username_et" />
 
+        <EditText
+            android:id="@+id/account_type_et"
+            android:layout_width="@dimen/popup_window_view_width"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/activity_vertical_margin"
+            android:hint="@string/account_type_hint"
+            android:inputType="textVisiblePassword"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/create_password_et" />
+
         <Button
             android:id="@+id/create_account_button"
             android:layout_width="wrap_content"
@@ -58,7 +70,7 @@
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/create_password_et" />
+            app:layout_constraintTop_toBottomOf="@id/account_type_et" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

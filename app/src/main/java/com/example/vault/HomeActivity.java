@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.TextView;
 
 
 import org.jetbrains.annotations.NotNull;
@@ -73,9 +74,16 @@ public class HomeActivity extends AppCompatActivity {
         passwordsLayout.addView(userCredsLayout);
         String userName = account.getUsername();
         String password = account.getPasswordHash();     //un-hash password here
+        String accountType = account.getAccountType();
         String hiddenPassword = hidePassword(password);
         Button button = setUpButton(account, userCredsLayout, userName, password, hiddenPassword);
         setupCopyButton(userCredsLayout, userName, password, button);
+        setUpAccountTypeTextView(accountType);
+    }
+
+    private void setUpAccountTypeTextView(String accountType) {
+        TextView accountTypeTV = findViewById(R.id.account_type_et);
+        accountTypeTV.setText(accountType);
     }
 
     private void setupCopyButton(LinearLayout userCredsLayout, String userName, String password, Button button) {

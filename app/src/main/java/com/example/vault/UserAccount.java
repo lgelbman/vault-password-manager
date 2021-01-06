@@ -4,10 +4,12 @@ public class UserAccount {
 
     private String username;
     private String passwordHash;
+    private String accountType;
 
-    public UserAccount(String username, String passwordHash) {
+    public UserAccount(String username, String passwordHash, String accountType) {
         this.username = username;
         this.passwordHash = passwordHash;
+        this.accountType = accountType;
     }
 
     public String getUsername() {
@@ -18,4 +20,5 @@ public class UserAccount {
         return passwordHash;
     }
 
+    public String getAccountType() { return this.accountType; }
 }

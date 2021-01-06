@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -37,12 +36,14 @@ public class AddNewAccountActivity extends Activity {
     private void createViews() {
         EditText usernameET = findViewById(R.id.create_username_et);
         EditText passwordET = findViewById(R.id.create_password_et);
+        EditText accountTypeET = findViewById(R.id.account_type_et);
         Button createAccountButton = findViewById(R.id.create_account_button);
         createAccountButton.setOnClickListener(v -> {
             String username = usernameET.getText().toString();
             String password = passwordET.getText().toString();
+            String accountType = accountTypeET.getText().toString();
             //hash password here
-            UserAccount userAccount = new UserAccount(username, password);
+            UserAccount userAccount = new UserAccount(username, password, accountType);
             model.addNewUser(userAccount, getApplicationContext());
             Intent restartHomeActivityIntent = new Intent(AddNewAccountActivity.this, HomeActivity.class);
             startActivity(restartHomeActivityIntent);
