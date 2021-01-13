@@ -16,6 +16,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -46,6 +47,13 @@ public class HomeActivity extends AppCompatActivity {
         String s2 = encrypter.decryptPassword("1234", s);
         DisplayPasswords();
         setupFab();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
     }
 
     private void setupFab() {

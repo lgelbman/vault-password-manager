@@ -25,6 +25,9 @@
     <string name="user_pin_key">VaultPIN</string>
     <string name="create_pin_button_text">Create</string>
     <string name="account_type_hint">Name of Account</string>
+    <string name="logout">Logout</string>
+    <string name="about">About</string>
+    <string name="menu">Menu</string>
 
 
 </resources>
