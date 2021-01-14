@@ -168,8 +168,8 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
+    protected void onStop() {
+        super.onStop();
         //user preference is set to logout when the app is not in the foregound
         if (!stayloggedIn()) {
             logout();
