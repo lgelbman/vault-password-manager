@@ -10,9 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Vault">
         <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings"></activity>
+        <activity
             android:name=".HomeActivity"
             android:label="@string/title_activity_home"
-            android:theme="@style/Theme.Vault.NoActionBar"></activity>
+            android:theme="@style/Theme.Vault.NoActionBar" />
         <activity
             android:name=".LoginActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -32,7 +35,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddNewAccountActivity" android:theme="@style/AppTheme.create_activity_theme"></activity>
-
+        <activity
+            android:name=".AddNewAccountActivity"
+            android:theme="@style/AppTheme.create_activity_theme" />
     </application>
+
 </manifest>

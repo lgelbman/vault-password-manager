@@ -12,7 +12,7 @@
     <string name="title_activity_home">Vault Password Manager</string>
     <string name="title_activity_create_pin">Create a PIN</string>
 
-    <string name="title_activity_login">FullscreenActivity</string>
+    <string name="title_activity_login">Vault Login</string>
     <string name="create_pin">Please create a PIN</string>
     <string name="enter_pin_hint">enter PIN</string>
     <string name="login_pin_hint">PIN</string>
@@ -28,6 +28,19 @@
     <string name="logout">Logout</string>
     <string name="about">About</string>
     <string name="menu">Menu</string>
+    <string name="about_info">Created by Yossi Rotenstreich and Leonardo Gelbman</string>
+    <string name="title_activity_settings">Settings</string>
+
+
+
+    <string name="stay_title">Stay Logged In</string>
+    <string name="stay_summary_on">Sign me out whenever I open a new app or go to the home screen
+    </string>
+    <string name="stay_summary_off">Keep me signed in whenever I open a new app or go to the home screen</string>
+    <string name="stay_logged_in">Keep me signed in</string>
+    <string name="stay_logged_in_summary">keep me logged in when the app is minimized</string>
+    <string name="settings">Settings</string>
+    <string name="security_settings">Security</string>
 
 
 </resources>
