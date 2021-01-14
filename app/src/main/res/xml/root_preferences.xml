@@ -3,15 +3,12 @@
 
     <PreferenceCategory app:title="@string/security_settings">
 
-
         <SwitchPreferenceCompat
+            app:defaultValue="true"
             app:key="stay"
             app:summaryOff="@string/stay_summary_off"
             app:summaryOn="@string/stay_summary_on"
             app:title="@string/stay_title" />
-
-
-
 
     </PreferenceCategory>
 

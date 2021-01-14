@@ -26,10 +26,8 @@ public class SettingsActivity extends AppCompatActivity {
                     .commit();
         }
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setHomeButtonEnabled(true);
-        actionBar.setDisplayHomeAsUpEnabled(true);
         if (actionBar != null) {
-
+            actionBar.setDisplayHomeAsUpEnabled(true);
         }
     }
 

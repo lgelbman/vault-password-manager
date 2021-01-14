@@ -4,27 +4,16 @@
     tools:context="com.example.vault.HomeActivity"
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-<!-- todo: make icons dark-->
     <item
-        android:id="@+id/overflowMenu"
-        android:icon="@drawable/ic_baseline_menu"
-        android:title="@string/menu"
-        app:showAsAction="always">
-
-        <menu>
-            <item
-                android:id="@+id/about"
-                android:icon="@android:drawable/ic_dialog_info"
-                android:title="@string/about" />
-            <item
-                android:id="@+id/logout"
-                android:icon="@android:drawable/ic_lock_power_off"
-                android:title="@string/logout"/>
-
-            <item
-                android:id="@+id/settings"
-                android:title="@string/title_activity_settings" />
-        </menu>
-    </item>
+        android:id="@+id/settings"
+        android:title="@string/title_activity_settings" />
+    <item
+        android:id="@+id/logout"
+        android:icon="@android:drawable/ic_lock_power_off"
+        android:title="@string/logout"/>
+    <item
+        android:id="@+id/about"
+        android:icon="@android:drawable/ic_dialog_info"
+        android:title="@string/about" />
 
 </menu>

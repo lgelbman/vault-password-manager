@@ -169,27 +169,22 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
-        if(AppIsNotOnForeground()) {
-            if (!stayLoggedIn()) {      // stay logged in setting is set to false
-                logUserOut();
-            }
+    protected void onRestart() {
+        super.onRestart();
+        if (!stayLoggedIn()) {      // stay logged in setting is set to false
+            logUserOut();
         }
     }
 
-    private boolean AppIsNotOnForeground() {
-        return false;
-    }
-
     private boolean stayLoggedIn() {
-        return sharedPreferences.getBoolean("STAY_LOGGED_IN", false);
+        return sharedPreferences.getBoolean("stay", true);
     }
 
     private void logUserOut() {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean("IsLoggedIn", false);
         editor.apply();
+        startActivity(new Intent(this, LoginActivity.class));
         finish();
     }
 
