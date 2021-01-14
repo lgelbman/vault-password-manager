@@ -90,13 +90,13 @@ public class HomeActivity extends AppCompatActivity {
         LinearLayout userCredsLayout = (LinearLayout) LayoutInflater.from(HomeActivity.this)
                 .inflate(R.layout.user_credentials_layout, null);
         passwordsLayout.addView(userCredsLayout);
-        String userName = account.getUsername();
+        String username = account.getUsername();
         String password = account.getPasswordHash();     //un-hash password here
         String accountType = account.getAccountType();
         String hiddenPassword = hidePassword(password);
-        Button button = setUpButton(account, userCredsLayout, userName, password, hiddenPassword);
+        Button button = setUpButton(account, userCredsLayout, username, password, hiddenPassword);
         TextView accountTypeTV = (TextView) userCredsLayout.getChildAt(0);
-        setupCopyButton(userCredsLayout, userName, password, button);
+        setupCopyButton(userCredsLayout, username, password, button);
         setUpAccountTypeTextView(accountType, accountTypeTV);
     }
 
@@ -104,7 +104,7 @@ public class HomeActivity extends AppCompatActivity {
         accountTypeTV.setText(accountType);
     }
 
-    private void setupCopyButton(LinearLayout userCredsLayout, String userName, String password, Button button) {
+    private void setupCopyButton(LinearLayout userCredsLayout, String username, String password, Button button) {
         ImageButton copyButton = (ImageButton) userCredsLayout.getChildAt(2);
         copyButton.setOnClickListener(v -> {
             ClipboardManager clipboard = (ClipboardManager)
@@ -112,8 +112,8 @@ public class HomeActivity extends AppCompatActivity {
             String currentTextOnButton = button.getText().toString();
             ClipData clip;
             Snackbar snackbar;
-            if (currentTextOnButton.equals(userName)) {
-                clip = ClipData.newPlainText("username", userName);
+            if (currentTextOnButton.equals(username)) {
+                clip = ClipData.newPlainText("username", username);
                 snackbar = Snackbar.make(cLayout,"username copied to clipboard", Snackbar.LENGTH_SHORT);
             } else {
                 clip = ClipData.newPlainText("password", password);
