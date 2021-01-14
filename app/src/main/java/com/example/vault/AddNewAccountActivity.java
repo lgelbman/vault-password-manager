@@ -45,7 +45,7 @@ public class AddNewAccountActivity extends Activity {
             //hash password here
             UserAccount userAccount = new UserAccount(username, password, accountType);
             model.addNewUser(userAccount, getApplicationContext());
-            Intent restartHomeActivityIntent = new Intent(AddNewAccountActivity.this, HomeActivity.class);
+            Intent restartHomeActivityIntent = new Intent(AddNewAccountActivity.this, MainActivity.class);
             startActivity(restartHomeActivityIntent);
             finish();
         });

@@ -9,10 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Vault">
+
         <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.Vault.NoActionBar">
+            android:name=".SplashActivity"
+            android:theme="@style/Theme.Vault.NoActionBar.SplashScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -31,14 +31,14 @@
             android:theme="@style/Theme.Vault.Fullscreen" />
 
         <activity
-            android:name=".HomeActivity"
+            android:name=".MainActivity"
             android:label="@string/title_activity_home"
             android:theme="@style/Theme.Vault.NoActionBar"/>
 
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:parentActivityName=".HomeActivity">
+            android:parentActivityName=".MainActivity">
         </activity>
 
         <activity
@@ -46,6 +46,5 @@
             android:theme="@style/AppTheme.create_activity_theme" />
 
     </application>
-
 
 </manifest>
