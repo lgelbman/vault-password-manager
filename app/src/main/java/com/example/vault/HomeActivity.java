@@ -5,30 +5,23 @@ import android.content.ClipboardManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import com.example.vault.data.Model;
-
-import com.example.vault.data.Utils;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
-
 import android.preference.PreferenceManager;
-import android.view.ContextThemeWrapper;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+
+import com.example.vault.data.Model;
+import com.example.vault.data.Utils;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -52,11 +45,11 @@ public class HomeActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         model = Model.getInstance(this);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        int hashedPin = encrypter.encryptPIN("1234");
-        String s = encrypter.encryptPassword("1234", "abcdef");
-        String s2 = encrypter.decryptPassword("1234", s);
-        DisplayPasswords();
+        //int hashedPin = encrypter.encryptPIN("1234");
+        //String s = encrypter.encryptPassword("1234", "abcdef");
+        //String s2 = encrypter.decryptPassword("1234", s);
         setupFab();
+        DisplayPasswords();
     }
 
     @Override
@@ -100,8 +93,30 @@ public class HomeActivity extends AppCompatActivity {
         setUpAccountTypeTextView(accountType, accountTypeTV);
     }
 
-    private void setUpAccountTypeTextView(String accountType, TextView accountTypeTV) {
-        accountTypeTV.setText(accountType);
+    private String hidePassword(String password) {
+        String hiddenPasswordSymbol = "•";
+        String result = "";
+        for (int i = 0; i < password.length(); i++){
+            result = result + hiddenPasswordSymbol;
+        }
+        return result;
+    }
+
+    @NotNull
+    private Button setUpButton(UserAccount account, LinearLayout userCredsLayout, String userName, String password, String hiddenPassword) {
+        Button button = (Button) userCredsLayout.getChildAt(1);
+        button.setText(account.getUsername());
+        button.setOnClickListener(v -> {
+            String currentTextOnButton = button.getText().toString();
+            if (currentTextOnButton.equals(userName)) {
+                button.setText(hiddenPassword);
+            } else if (currentTextOnButton.equals(hiddenPassword)) {
+                button.setText(password);
+            } else {
+                button.setText(userName);
+            }
+        });
+        return button;
     }
 
     private void setupCopyButton(LinearLayout userCredsLayout, String username, String password, Button button) {
@@ -124,30 +139,8 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
-    @NotNull
-    private Button setUpButton(UserAccount account, LinearLayout userCredsLayout, String userName, String password, String hiddenPassword) {
-        Button button = (Button) userCredsLayout.getChildAt(1);
-        button.setText(account.getUsername());
-        button.setOnClickListener(v -> {
-            String currentTextOnButton = button.getText().toString();
-            if (currentTextOnButton.equals(userName)) {
-                button.setText(hiddenPassword);
-            } else if (currentTextOnButton.equals(hiddenPassword)) {
-                button.setText(password);
-            } else {
-                button.setText(userName);
-            }
-        });
-        return button;
-    }
-
-    private String hidePassword(String password){
-        String hiddenPasswordSymbol = "•";
-        String result = "";
-        for (int i = 0; i < password.length(); i++){
-            result = result + hiddenPasswordSymbol;
-        }
-        return result;
+    private void setUpAccountTypeTextView(String accountType, TextView accountTypeTV) {
+        accountTypeTV.setText(accountType);
     }
 
     @Override
@@ -164,7 +157,7 @@ public class HomeActivity extends AppCompatActivity {
         if (id == R.id.logout) {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
-            logout();
+            logUserOut();
         }
 
         if (id == R.id.settings) {
@@ -178,17 +171,22 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        //user preference is set to logout when the app is not in the foregound
-        if (!stayloggedIn()) {
-            logout();
+        if(AppIsNotOnForeground()) {
+            if (!stayLoggedIn()) {      // stay logged in setting is set to false
+                logUserOut();
+            }
         }
     }
 
-    private boolean stayloggedIn() {
+    private boolean AppIsNotOnForeground() {
+        return false;
+    }
+
+    private boolean stayLoggedIn() {
         return sharedPreferences.getBoolean("STAY_LOGGED_IN", false);
     }
 
-    private void logout() {
+    private void logUserOut() {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean("IsLoggedIn", false);
         editor.apply();
@@ -197,3 +195,4 @@ public class HomeActivity extends AppCompatActivity {
 
 
 }
+

@@ -18,7 +18,6 @@
     <string name="login_pin_hint">PIN</string>
     <string name="confirm_pin_hint">confirm PIN</string>
     <string name="login_pin_header">Enter PIN to unlock</string>
-    <string name="accounts_file_path">"/Vault/app/src/main/assets/AccountsData.txt"</string>
     <string name="create_username_hint">Username</string>
     <string name="create_password_hint">Password</string>
     <string name="create_account_button_text">save</string>
@@ -31,16 +30,10 @@
     <string name="about_info">Created by Yossi Rotenstreich and Leonardo Gelbman</string>
     <string name="title_activity_settings">Settings</string>
 
-
-
-    <string name="stay_title">Stay Logged In</string>
-    <string name="stay_summary_on">Sign me out whenever I open a new app or go to the home screen
-    </string>
-    <string name="stay_summary_off">Keep me signed in whenever I open a new app or go to the home screen</string>
-    <string name="stay_logged_in">Keep me signed in</string>
-    <string name="stay_logged_in_summary">keep me logged in when the app is minimized</string>
-    <string name="settings">Settings</string>
+    <!-- settings strings -->
     <string name="security_settings">Security</string>
-
+    <string name="stay_title">Stay Logged In</string>
+    <string name="stay_summary_on">Keep me logged in when the app is moved to background</string>
+    <string name="stay_summary_off">Log out every time I leave the app</string>
 
 </resources>
