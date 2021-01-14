@@ -10,10 +10,12 @@ import com.example.vault.data.Model;
 
 import com.example.vault.data.Utils;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import android.preference.PreferenceManager;
 import android.view.ContextThemeWrapper;
@@ -38,6 +40,7 @@ public class HomeActivity extends AppCompatActivity {
     private LinearLayout passwordsLayout;
     private Encrypter encrypter = new Encrypter();
     private SharedPreferences sharedPreferences;
+    private CoordinatorLayout cLayout;
 
 
     @Override
@@ -45,6 +48,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         Toolbar toolbar = findViewById(R.id.toolbar);
+        cLayout = findViewById(R.id.home_activity);
         setSupportActionBar(toolbar);
         model = Model.getInstance(this);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -107,12 +111,16 @@ public class HomeActivity extends AppCompatActivity {
                     getSystemService(this.CLIPBOARD_SERVICE);
             String currentTextOnButton = button.getText().toString();
             ClipData clip;
+            Snackbar snackbar;
             if (currentTextOnButton.equals(userName)) {
-                clip = ClipData.newPlainText("password", userName);
+                clip = ClipData.newPlainText("username", userName);
+                snackbar = Snackbar.make(cLayout,"username copied to clipboard", Snackbar.LENGTH_SHORT);
             } else {
                 clip = ClipData.newPlainText("password", password);
+                snackbar = Snackbar.make(cLayout,"password copied to clipboard", Snackbar.LENGTH_SHORT);
             }
             clipboard.setPrimaryClip(clip);
+            snackbar.show();
         });
     }
 
