@@ -1,5 +1,6 @@
 package com.example.vault;
 
+import android.animation.ObjectAnimator;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Intent;
@@ -17,16 +18,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
+
 import android.preference.PreferenceManager;
 import android.view.ContextThemeWrapper;
+import android.view.DragEvent;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.Switch;
 import android.widget.TextView;
 
 
@@ -89,6 +95,7 @@ public class HomeActivity extends AppCompatActivity {
     private void setUpUserCredsLayout(UserAccount account) {
         LinearLayout userCredsLayout = (LinearLayout) LayoutInflater.from(HomeActivity.this)
                 .inflate(R.layout.user_credentials_layout, null);
+        setLongPressListener(userCredsLayout);
         passwordsLayout.addView(userCredsLayout);
         String userName = account.getUsername();
         String password = account.getPasswordHash();     //un-hash password here
@@ -193,6 +200,43 @@ public class HomeActivity extends AppCompatActivity {
         editor.putBoolean("IsLoggedIn", false);
         editor.apply();
         finish();
+    }
+
+    private void addEditButton(UserAccount userAccount, LinearLayout passwordsLayout) {
+        Button editBtn = new Button(this);
+        editBtn.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+        editBtn.setText("Edit");
+        editBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, AddNewAccountActivity.class);
+                intent.putExtra("type", userAccount.getAccountType());
+                intent.putExtra("username", userAccount.getUsername());
+                intent.putExtra("password", userAccount.getPasswordHash());
+                startActivity(intent);
+            }
+        });
+        passwordsLayout.addView(editBtn);
+    }
+
+    private void setLongPressListener(View v) {
+        v.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                double currentX = v.getX();
+                float amountToMoveV;
+                if (currentX == 0.0){
+                    amountToMoveV = -250.0f;
+                } else {
+                    amountToMoveV = 0.0f;
+                }
+                ObjectAnimator animation = ObjectAnimator.ofFloat(v, "translationX", amountToMoveV);
+                animation.setDuration(500);
+                animation.start();
+
+                return false;
+            }
+        });
     }
 
 

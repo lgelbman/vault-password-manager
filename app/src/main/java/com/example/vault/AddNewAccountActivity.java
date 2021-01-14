@@ -15,11 +15,16 @@ import com.example.vault.data.Model;
 public class AddNewAccountActivity extends Activity {
 
     private Model model;
+    private Bundle extras;
+    private EditText usernameET;
+    private EditText passwordET;
+    private EditText accountTypeET;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         model = Model.getInstance(this);
+        extras = getIntent().getExtras();
         setUpLayout();
     }
 
@@ -38,6 +43,12 @@ public class AddNewAccountActivity extends Activity {
         EditText passwordET = findViewById(R.id.create_password_et);
         EditText accountTypeET = findViewById(R.id.account_type_et);
         Button createAccountButton = findViewById(R.id.create_account_button);
+        if (extras != null) {
+            usernameET.setText(extras.getString("username"));
+            passwordET.setText(extras.getString("password"));
+            accountTypeET.setText(extras.getString("type"));
+            createAccountButton.setText("Change");
+        }
         createAccountButton.setOnClickListener(v -> {
             String username = usernameET.getText().toString();
             String password = passwordET.getText().toString();
@@ -50,5 +61,7 @@ public class AddNewAccountActivity extends Activity {
             finish();
         });
     }
+
+
 
 }
