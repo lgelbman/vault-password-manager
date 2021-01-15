@@ -69,11 +69,8 @@ public class CreatePinActivity extends AppCompatActivity {
     }
 
     private void logInUser() {
-        Intent homeIntent = new Intent(this, MainActivity.class);
-        startActivity(homeIntent);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean("IsLoggedIn", true);
-        editor.apply();
+        Intent main = new Intent(this, MainActivity.class);
+        startActivity(main);
         finish();
     }
 }
