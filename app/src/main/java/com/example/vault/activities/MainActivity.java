@@ -16,7 +16,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import com.example.vault.R;
-import com.example.vault.data.Encrypter;
 import com.example.vault.data.Model;
 import com.example.vault.data.UserAccount;
 import com.example.vault.data.Utils;
@@ -30,7 +29,6 @@ public class MainActivity extends VaultAppActivity {
 
     private Model model;
     private LinearLayout passwordsLayout;
-    private Encrypter encrypter = new Encrypter();
     private CoordinatorLayout cLayout;
 
     @Override

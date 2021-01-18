@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.PreferenceManager;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -22,8 +21,6 @@ import com.example.vault.R;
  * status bar and navigation/system bar) with user interaction.
  */
 public class LoginActivity extends VaultAppActivity {
-
-    SharedPreferences sharedPreferences;
 
     /**
      * Whether or not the system UI should be auto-hidden after
@@ -114,7 +111,6 @@ public class LoginActivity extends VaultAppActivity {
         mControlsView = findViewById(R.id.fullscreen_content_controls);
         mContentView = findViewById(R.id.login_enter_pin_tv);
 
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         setupLayout();
 
         // Set up the user interaction to manually show or hide the system UI.

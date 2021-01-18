@@ -16,7 +16,6 @@ import com.example.vault.data.Encrypter;
 public class CreatePinActivity extends VaultAppActivity {
 
     final String VALID_PIN_PATTERN = "\\d\\d\\d\\d";
-    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
