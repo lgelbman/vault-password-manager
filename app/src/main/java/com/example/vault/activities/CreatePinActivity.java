@@ -9,13 +9,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.vault.R;
 import com.example.vault.data.Encrypter;
 
-public class CreatePinActivity extends AppCompatActivity {
+public class CreatePinActivity extends VaultAppActivity {
 
     final String VALID_PIN_PATTERN = "\\d\\d\\d\\d";
     SharedPreferences sharedPreferences;

@@ -14,7 +14,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.vault.R;
 
@@ -22,7 +21,7 @@ import com.example.vault.R;
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends VaultAppActivity {
 
     SharedPreferences sharedPreferences;
 

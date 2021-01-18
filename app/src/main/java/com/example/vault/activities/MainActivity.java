@@ -3,7 +3,6 @@ package com.example.vault.activities;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
@@ -14,7 +13,6 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
@@ -29,12 +27,11 @@ import com.google.android.material.snackbar.Snackbar;
 import org.jetbrains.annotations.NotNull;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends VaultAppActivity {
 
     private Model model;
     private LinearLayout passwordsLayout;
     private Encrypter encrypter = new Encrypter();
-    private SharedPreferences sharedPreferences;
     private CoordinatorLayout cLayout;
 
     @Override
@@ -166,26 +163,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        if (!stayLoggedIn()) {      // stay logged in setting is set to false
-            logUserOut();
-        }
-    }
-
-    private boolean stayLoggedIn() {
-        return sharedPreferences.getBoolean("stay", true);
-    }
-
-    private void logUserOut() {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean("IsLoggedIn", false);
-        editor.apply();
-        startActivity(new Intent(this, LoginActivity.class));
-        finish();
     }
 
 }

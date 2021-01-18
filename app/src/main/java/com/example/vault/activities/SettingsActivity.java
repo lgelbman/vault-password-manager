@@ -5,12 +5,11 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceFragmentCompat;
 
 import com.example.vault.R;
 
-public class SettingsActivity extends AppCompatActivity {
+public class SettingsActivity extends VaultAppActivity {
 
     SharedPreferences sharedPreferences;
 
