@@ -1,19 +1,18 @@
 package com.example.vault;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Encrypter {
 
-    private final int PIN_LIMIT = 4;
-    private final int ASCII_TABLE_SIZE = 128;
+    private static final int PIN_LIMIT = 4;
+    private static final int ASCII_TABLE_SIZE = 128;
 
-    public int encryptPIN(String pin) {
-        return sumOfChars(pin) * Integer.parseInt(pin) % 1000;
+    public static int encryptPIN(String pin) {
+        return (sumOfChars(pin) * Integer.parseInt(pin)) % 1000;
     }
 
-    private int sumOfChars(String pin) {
+    private static int sumOfChars(String pin) {
         int sum = 0;
         for (int i = 0; i < PIN_LIMIT; i++) {
             sum += Character.getNumericValue(pin.charAt(i));
@@ -21,12 +20,12 @@ public class Encrypter {
         return sum;
     }
 
-    public String encryptPassword(String pin, String password) {
+    public static String encryptPassword(String pin, String password) {
         Map<Integer, Integer> encryptionMap = generateEncryptionMap(pin);
         return encryptStringWithMap(password, encryptionMap);
     }
 
-    private Map<Integer, Integer> generateEncryptionMap(String pin) {
+    private static Map<Integer, Integer> generateEncryptionMap(String pin) {
         Map<Integer, Integer> map = new HashMap<>();
         int[] encryptedPIN = generatePinEncryptedAscii(pin);
         for (int i = 0; i < PIN_LIMIT; i++) {
@@ -44,7 +43,7 @@ public class Encrypter {
         return map;
     }
 
-    private int[] generatePinEncryptedAscii(String pin) {
+    private static int[] generatePinEncryptedAscii(String pin) {
         int[] encryptedAscii = new int[PIN_LIMIT];
         int pinSum = sumOfChars(pin);
         for (int i = 0; i < PIN_LIMIT; i++) {
@@ -55,7 +54,7 @@ public class Encrypter {
         return encryptedAscii;
     }
 
-    private String encryptStringWithMap(String password, Map<Integer, Integer> encryptionMap) {
+    private static String encryptStringWithMap(String password, Map<Integer, Integer> encryptionMap) {
         StringBuilder encryptedPassword = new StringBuilder();
         for (int i = 0; i < password.length(); i++) {
             int ascii = password.charAt(i);                         // get ascii of password char
@@ -66,7 +65,7 @@ public class Encrypter {
         return encryptedPassword.toString();
     }
 
-    public String decryptPassword(String pin, String encryptedPassword) {
+    public static String decryptPassword(String pin, String encryptedPassword) {
         StringBuilder decryptedPassword = new StringBuilder();
         Map<Integer, Integer> decryptionMap = invertMap(generateEncryptionMap(pin));
         for (int i = 0; i < encryptedPassword.length(); i++) {
@@ -78,7 +77,7 @@ public class Encrypter {
         return decryptedPassword.toString();
     }
 
-    private Map<Integer, Integer> invertMap(Map<Integer, Integer> map) {
+    private static Map<Integer, Integer> invertMap(Map<Integer, Integer> map) {
         Map<Integer, Integer> invertedMap = new HashMap<>();
         for (Map.Entry<Integer, Integer> e : map.entrySet()) {
             invertedMap.put(e.getValue(), e.getKey());

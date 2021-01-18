@@ -38,7 +38,7 @@ public class CreatePinActivity extends AppCompatActivity {
 
             if (isValidPIN(pin1, pin2)) {
                 savePIN(pin1);
-                logInUser();
+                logUserIn();
             }
         });
     }
@@ -46,15 +46,17 @@ public class CreatePinActivity extends AppCompatActivity {
     private boolean isValidPIN(String pin1, String pin2) {
         TextView feedbackTV = findViewById(R.id.user_feedback_tv);
 
+        // eliminate white space
+        pin1 = pin1.trim();
+        pin2 = pin2.trim();
+
         if (!pin1.equals(pin2)) {
-            // do something
             feedbackTV.setTextColor(Color.RED);
             feedbackTV.setText("PINs don't match");
             return false;
         }
 
         if (!pin1.matches(VALID_PIN_PATTERN)) {
-            // do something
             feedbackTV.setTextColor(Color.RED);
             feedbackTV.setText("Invalid PIN pattern");
             return false;
@@ -63,12 +65,13 @@ public class CreatePinActivity extends AppCompatActivity {
     }
 
     private void savePIN(String pin) {
+        pin =  Integer.toString(Encrypter.encryptPIN(pin));
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(getString(R.string.user_pin_key), pin);
         editor.apply();
     }
 
-    private void logInUser() {
+    private void logUserIn() {
         Intent main = new Intent(this, MainActivity.class);
         startActivity(main);
         finish();
