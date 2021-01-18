@@ -29,7 +29,7 @@ public class AddNewAccountActivity extends Activity {
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         int width = dm.widthPixels;
         int height = dm.heightPixels;
-        getWindow().setLayout((int) (width * .5), (int) (height * .5));
+        getWindow().setLayout((int) (width * .6), (int) (height * .6));
         createViews();
     }
 

@@ -39,6 +39,7 @@ public class Model {
             read(context);
         } else {
             createFile(context);
+            accounts = new ArrayList<>();
         }
 
     }
