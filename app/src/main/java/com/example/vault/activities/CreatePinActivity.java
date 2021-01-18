@@ -65,9 +65,9 @@ public class CreatePinActivity extends VaultAppActivity {
     }
 
     private void savePIN(String pin) {
-        pin =  Integer.toString(Encrypter.encryptPIN(pin));
+        String encryptedPIN =  Integer.toString(Encrypter.encryptPIN(pin));
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(getString(R.string.user_pin_key), pin);
+        editor.putString(getString(R.string.user_pin_key), encryptedPIN);
         editor.apply();
     }
 
