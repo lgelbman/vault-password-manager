@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/activity_vertical_margin"
             android:hint="@string/create_password_hint"
-            android:inputType="textVisiblePassword"
+            android:inputType="textPassword"
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
