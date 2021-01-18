@@ -2,12 +2,21 @@ package com.example.vault.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.preference.PreferenceManager;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public abstract class VaultAppActivity extends AppCompatActivity {
 
     protected SharedPreferences sharedPreferences;
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+    }
 
     @Override
     protected void onRestart() {

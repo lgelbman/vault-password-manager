@@ -4,7 +4,6 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Intent;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -42,7 +41,6 @@ public class MainActivity extends VaultAppActivity {
         cLayout = findViewById(R.id.home_activity);
         setSupportActionBar(toolbar);
         model = Model.getInstance(this);
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         //int hashedPin = encrypter.encryptPIN("1234");
         //String s = encrypter.encryptPassword("1234", "abcdef");
         //String s2 = encrypter.decryptPassword("1234", s);
