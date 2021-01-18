@@ -15,6 +15,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.ActionBar;
 
 import com.example.vault.R;
+import com.example.vault.data.Encrypter;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -142,6 +143,13 @@ public class LoginActivity extends VaultAppActivity {
         });
     }
 
+    private boolean isPinCorrect(String inputPIN) {
+        String encryptedInput = Integer.toString(Encrypter.encryptPIN(inputPIN));
+        String encryptedUserPIN = sharedPreferences.getString(getString(R.string.user_pin_key), null);
+        //un-hash pin here
+        return encryptedInput.equals(encryptedUserPIN);
+    }
+
     private void logUserIn() {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean("IsLoggedIn", true);
@@ -149,12 +157,6 @@ public class LoginActivity extends VaultAppActivity {
         Intent homeIntent = new Intent(this, MainActivity.class);
         startActivity(homeIntent);
         finish();
-    }
-
-    private boolean isPinCorrect(String inputPIN) {
-        String userPIN = sharedPreferences.getString(getString(R.string.user_pin_key), null);
-        //un-hash pin here
-        return userPIN.equals(inputPIN);
     }
 
     @Override
