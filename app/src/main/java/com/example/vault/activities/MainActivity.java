@@ -161,5 +161,12 @@ public class MainActivity extends VaultAppActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed()
+    {
+        // code here to show dialog
+        super.onBackPressed();  // optional depending on your needs
+    }
+
 }
 

@@ -1,5 +1,6 @@
 package com.example.vault.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.ActionBar;
@@ -31,5 +32,12 @@ public class SettingsActivity extends VaultAppActivity {
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey);
         }
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        // refreshes MainActivity in case new accounts were added
+        startActivity(new Intent(this, MainActivity.class));
     }
 }
