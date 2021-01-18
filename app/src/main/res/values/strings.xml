@@ -18,8 +18,11 @@
     <string name="login_pin_hint">PIN</string>
     <string name="confirm_pin_hint">confirm PIN</string>
     <string name="login_pin_header">Enter PIN to unlock</string>
+    <string name="login_activity_incorrect_pin">Incorrect PIN</string>
     <string name="create_username_hint">Username</string>
     <string name="create_password_hint">Password</string>
+    <string name="create_pin_no_match">PINs don\'t match</string>
+    <string name="create_pin_invalid_pattern">Invalid PIN pattern</string>
     <string name="create_account_button_text">save</string>
     <string name="user_pin_key">VaultPIN</string>
     <string name="create_pin_button_text">Create</string>
@@ -35,5 +38,6 @@
     <string name="stay_title">Stay Logged In</string>
     <string name="stay_summary_on">Keep me logged in when the app is moved to background</string>
     <string name="stay_summary_off">Log out every time I leave the app</string>
+
 
 </resources>

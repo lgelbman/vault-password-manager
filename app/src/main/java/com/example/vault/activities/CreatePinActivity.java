@@ -52,13 +52,13 @@ public class CreatePinActivity extends VaultAppActivity {
 
         if (!pin1.equals(pin2)) {
             feedbackTV.setTextColor(Color.RED);
-            feedbackTV.setText("PINs don't match");
+            feedbackTV.setText(R.string.create_pin_no_match);
             return false;
         }
 
         if (!pin1.matches(VALID_PIN_PATTERN)) {
             feedbackTV.setTextColor(Color.RED);
-            feedbackTV.setText("Invalid PIN pattern");
+            feedbackTV.setText(R.string.create_pin_invalid_pattern);
             return false;
         }
         return true;

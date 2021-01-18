@@ -141,7 +141,7 @@ public class LoginActivity extends VaultAppActivity {
             } else {
                 TextView feedBackTV = findViewById(R.id.login_user_feedback_tv);
                 feedBackTV.setTextColor(Color.RED);
-                feedBackTV.setText("Incorrect PIN");
+                feedBackTV.setText(R.string.login_activity_incorrect_pin);
             }
         });
     }
