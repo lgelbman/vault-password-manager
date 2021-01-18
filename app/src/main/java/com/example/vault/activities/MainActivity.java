@@ -1,4 +1,4 @@
-package com.example.vault;
+package com.example.vault.activities;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -18,7 +18,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
+import com.example.vault.R;
+import com.example.vault.data.Encrypter;
 import com.example.vault.data.Model;
+import com.example.vault.data.UserAccount;
 import com.example.vault.data.Utils;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;

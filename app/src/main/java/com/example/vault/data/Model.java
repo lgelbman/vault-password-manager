@@ -2,7 +2,6 @@ package com.example.vault.data;
 
 import android.content.Context;
 
-import com.example.vault.UserAccount;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;

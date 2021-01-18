@@ -1,4 +1,4 @@
-package com.example.vault;
+package com.example.vault.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,6 +11,9 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import com.example.vault.R;
+import com.example.vault.data.Encrypter;
 
 public class CreatePinActivity extends AppCompatActivity {
 

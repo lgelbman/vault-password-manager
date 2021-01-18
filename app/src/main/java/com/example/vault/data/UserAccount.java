@@ -1,4 +1,4 @@
-package com.example.vault;
+package com.example.vault.data;
 
 public class UserAccount {
 

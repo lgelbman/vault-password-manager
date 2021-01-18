@@ -11,7 +11,7 @@
         android:theme="@style/Theme.Vault">
 
         <activity
-            android:name=".SplashActivity"
+            android:name=".activities.SplashActivity"
             android:theme="@style/Theme.Vault.NoActionBar.SplashScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,29 +20,29 @@
         </activity>
 
         <activity
-            android:name=".CreatePinActivity"
+            android:name=".activities.CreatePinActivity"
             android:label="@string/title_activity_create_pin"
             android:theme="@style/Theme.Vault.NoActionBar" />
 
         <activity
-            android:name=".LoginActivity"
+            android:name=".activities.LoginActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_login"
             android:theme="@style/Theme.Vault.Fullscreen" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:label="@string/title_activity_home"
             android:theme="@style/Theme.Vault.NoActionBar"/>
 
         <activity
-            android:name=".SettingsActivity"
+            android:name=".activities.SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".activities.MainActivity">
         </activity>
 
         <activity
-            android:name=".AddNewAccountActivity"
+            android:name=".activities.AddNewAccountActivity"
             android:theme="@style/AppTheme.create_activity_theme" />
 
     </application>

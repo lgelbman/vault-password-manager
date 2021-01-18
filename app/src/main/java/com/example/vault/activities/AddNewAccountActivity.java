@@ -1,4 +1,4 @@
-package com.example.vault;
+package com.example.vault.activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,7 +9,9 @@ import android.widget.EditText;
 
 import androidx.annotation.Nullable;
 
+import com.example.vault.R;
 import com.example.vault.data.Model;
+import com.example.vault.data.UserAccount;
 
 
 public class AddNewAccountActivity extends Activity {
