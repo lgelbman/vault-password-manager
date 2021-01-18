@@ -28,13 +28,11 @@ import org.jetbrains.annotations.NotNull;
 
 public class MainActivity extends AppCompatActivity {
 
-
     private Model model;
     private LinearLayout passwordsLayout;
     private Encrypter encrypter = new Encrypter();
     private SharedPreferences sharedPreferences;
     private CoordinatorLayout cLayout;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
     }
-    
 
     private void DisplayPasswords() {
         passwordsLayout = getLinearLayout(R.id.passwords_layout);
@@ -187,7 +184,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this, LoginActivity.class));
         finish();
     }
-
 
 }
 
