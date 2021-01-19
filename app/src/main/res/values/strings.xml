@@ -44,5 +44,6 @@
     <string name="stay_title">Stay Logged In</string>
     <string name="stay_summary_on">Keep me logged in when the app is moved to background</string>
     <string name="stay_summary_off">Log out every time I leave the app</string>
+    <string name="stay_logged_in_key">STAY</string>
 
 </resources>

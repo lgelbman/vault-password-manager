@@ -8,6 +8,8 @@ import android.preference.PreferenceManager;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.vault.R;
+
 public abstract class VaultAppActivity extends AppCompatActivity {
 
     protected SharedPreferences sharedPreferences;
@@ -21,21 +23,26 @@ public abstract class VaultAppActivity extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        if (!stayLoggedIn()) {      // stay logged in setting is set to false
+        if (!stayLoggedIn()) {      // if stay logged in setting is set to false
             logUserOut();
         }
     }
 
     protected boolean stayLoggedIn() {
-        return sharedPreferences.getBoolean("stay", true);
+        return sharedPreferences.getBoolean(Integer
+                .toString(R.string.stay_logged_in_key), true);
     }
 
     protected void logUserOut() {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean("IsLoggedIn", false);
-        editor.apply();
-        startActivity(new Intent(this, SplashActivity.class));
+        Intent intent = new Intent(this, SplashActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP
+                | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
         finish();
     }
 
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 }

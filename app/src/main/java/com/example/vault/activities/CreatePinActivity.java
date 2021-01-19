@@ -37,7 +37,7 @@ public class CreatePinActivity extends VaultAppActivity {
 
             if (isValidPIN(pin1, pin2)) {
                 savePIN(pin1);
-                logUserIn();
+                restartApp();
             }
         });
     }
@@ -70,9 +70,10 @@ public class CreatePinActivity extends VaultAppActivity {
         editor.apply();
     }
 
-    private void logUserIn() {
-        Intent main = new Intent(this, MainActivity.class);
-        startActivity(main);
+    private void restartApp() {
+        Intent intent = new Intent(this, SplashActivity.class);
+        startActivity(intent);
         finish();
     }
+
 }

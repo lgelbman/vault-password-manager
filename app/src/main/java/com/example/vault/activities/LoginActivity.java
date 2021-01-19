@@ -2,7 +2,6 @@ package com.example.vault.activities;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -151,11 +150,8 @@ public class LoginActivity extends VaultAppActivity {
     }
 
     private void logUserIn() {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean("IsLoggedIn", true);
-        editor.apply();
-        Intent homeIntent = new Intent(this, MainActivity.class);
-        startActivity(homeIntent);
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
         finish();
     }
 

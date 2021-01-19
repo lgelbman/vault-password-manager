@@ -2,7 +2,9 @@ package com.example.vault.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.preference.PreferenceFragmentCompat;
 
@@ -21,7 +23,9 @@ public class SettingsActivity extends VaultAppActivity {
                     .replace(R.id.settings, new SettingsFragment())
                     .commit();
         }
+
         ActionBar actionBar = getSupportActionBar();
+
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
@@ -35,9 +39,17 @@ public class SettingsActivity extends VaultAppActivity {
     }
 
     @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        onBackPressed();
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public void onBackPressed()
     {
         // refreshes MainActivity in case new accounts were added
-        startActivity(new Intent(this, MainActivity.class));
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

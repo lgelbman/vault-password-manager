@@ -158,6 +158,7 @@ public class MainActivity extends VaultAppActivity {
         if (id == R.id.settings) {
             Intent intent = new Intent(this, SettingsActivity.class);
             startActivity(intent);
+            finish();
         }
 
         return super.onOptionsItemSelected(item);
@@ -199,8 +200,8 @@ public class MainActivity extends VaultAppActivity {
         // create builder object
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-        // set icon, message, and click handlers
-        builder.setIcon(R.mipmap.ic_launcher_round).setMessage(R.string.sign_out_dialog_msg)
+        // set message and click handlers
+        builder.setMessage(R.string.sign_out_dialog_msg)
                 .setPositiveButton(R.string.sign_out, positiveListener)
                 .setNegativeButton(R.string.cancel, negativeListener);
 
