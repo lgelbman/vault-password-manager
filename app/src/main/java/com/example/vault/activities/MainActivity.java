@@ -2,6 +2,7 @@ package com.example.vault.activities;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
@@ -164,9 +166,47 @@ public class MainActivity extends VaultAppActivity {
     @Override
     public void onBackPressed()
     {
-        // code here to show dialog
-        super.onBackPressed();  // optional depending on your needs
+        showSignOutDialog();
     }
+
+    private  void showSignOutDialog() {
+        AlertDialog dialog = buildSignOutDialog();
+        dialog.show();
+    }
+
+    private AlertDialog buildSignOutDialog()
+    {
+        // create positive button click listener
+        final DialogInterface.OnClickListener positiveListener = new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialog, int which)
+            {
+                logUserOut();
+            }
+        };
+
+        // create negative click listener
+        final DialogInterface.OnClickListener negativeListener = new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialog, int which)
+            {
+                // nothing needed here
+            }
+        };
+
+        // create builder object
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        // set icon, message, and click handlers
+        builder.setIcon(R.mipmap.ic_launcher_round).setMessage(R.string.sign_out_dialog_msg)
+                .setPositiveButton(R.string.sign_out, positiveListener)
+                .setNegativeButton(R.string.cancel, negativeListener);
+
+        return builder.create();
+    }
+
 
 }
 
